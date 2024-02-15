@@ -1,20 +1,24 @@
-let spreech = new SpeechSynthesisUtterance();
+let speech = new SpeechSynthesisUtterance();
 
 let voices = [];
 
-let voiceSelect = document.querySelector("textarea");
+let voiceSelect = document.querySelector("select");
 
-window.SpeechSynthesis.onvoiceschanged = () => {
+window.speechSynthesis.onvoiceschanged = () => {
     voices = window.speechSynthesis.getVoices();
-    spreech.voices = voices[0];
+    speech.voice = voices[0];
 
     voices.forEach((voice,i) => (voiceSelect.options[i] = new Option(voice.name,i)))
 
 }
 
+voiceSelect.addEventListener('change', () => {
+    speech.voice = voice [voiceSelect.value];
+})
+
 document.querySelector("button").addEventListener("click", () => {
 
     spreech.text = document.querySelector("textarea").value
-    window.speechSynthesis.speak(spreech)
+    window.speechSynthesis.speak(speech)
     
 })
